@@ -44,7 +44,7 @@ def transformRDD(spark, csv):
         rddUnique: pyspark.rdd.RDD
     """
     rdd=spark.sparkContext.parallelize(csv)
-    rddUnique = rdd.distinct()
+    rddUnique = rdd.coalesce(1).distinct()
     return rddUnique
 
     
@@ -64,7 +64,7 @@ def main():
     
     """
     filePath = '../files/groceries.csv'
-    outPutPath = '../test2_out/out_1_2a.txt'
+    outPutPath = '../out/out_1_2a.txt'
     spark = startSpark()
     csv = extractCSV(filePath)
     rdd = transformRDD(spark, csv)

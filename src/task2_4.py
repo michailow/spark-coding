@@ -55,7 +55,7 @@ def loadDF(df, outputPath):
     Return:
         None
     """
-    df.write.csv(outputPath)
+    df.coalesce(1).write.csv(outputPath)
 
 
 def main():
@@ -63,7 +63,7 @@ def main():
     
     """
     filePath = '../files/part-00000.parquet'
-    outPutPath = '../test2_out/out_2_4.txt'
+    outPutPath = '../out/out_2_4.txt'
     
     spark = startSpark()
     df = extractDF(spark, filePath)

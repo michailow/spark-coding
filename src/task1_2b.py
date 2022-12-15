@@ -58,7 +58,7 @@ def loadCSV(rdd, outputPath):
     Return:
         None
     """
-    rdd.saveAsTextFile(outputPath)
+    rdd.coalesce(1).saveAsTextFile(outputPath)
 
 
 def main():
@@ -66,7 +66,7 @@ def main():
     
     """
     filePath = '../files/groceries.csv'
-    outPutPath = '../test2_out/out_1_2b.txt'
+    outPutPath = '../out/out_1_2b.txt'
     spark = startSpark()
     csv = extractCSV(filePath)
     rdd = transformRDD(spark, csv)
